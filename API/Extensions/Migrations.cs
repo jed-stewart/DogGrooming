@@ -9,7 +9,7 @@ namespace API.Extensions
             var serviceProvider = scope.ServiceProvider;
 
             var databaseService = serviceProvider.GetRequiredService<IDatabaseService>();
-            await databaseService.Migrate();
+            await databaseService.MigrateAsync();
         }
     }
 }

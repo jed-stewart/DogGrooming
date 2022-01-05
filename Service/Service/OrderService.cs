@@ -15,14 +15,14 @@ namespace Shared.Service
         }
 
 
-        public async Task<Order> Add(Order order)
+        public async Task<Order> AddAsync(Order order)
         {
             await _orderContext.Order.AddAsync(order);
             await _orderContext.SaveChangesAsync();
             return order;
         }
 
-        public async Task<Order> Update(Order order)
+        public async Task<Order> UpdateAsync(Order order)
         {
             var entry = _orderContext.Order.Update(order);
             await _orderContext.SaveChangesAsync();

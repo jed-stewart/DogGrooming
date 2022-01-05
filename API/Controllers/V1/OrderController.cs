@@ -21,9 +21,9 @@ namespace API.Controllers.V1
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesErrorResponseType(typeof(BadRequestResult))]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> AddOrder(Order order)
+        public async Task<ActionResult> AddOrderAsync(Order order)
         {
-           await _orderService.Add(order);
+           await _orderService.AddAsync(order);
             if (order.Id == 0)
             {
                 return BadRequest();
