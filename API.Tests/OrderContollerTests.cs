@@ -21,10 +21,10 @@ namespace API.Tests
             };
             //Arrange
             var mock = new Mock<IOrderService>();
-            mock.Setup(o => o.Add(order)).ReturnsAsync(order);
+            mock.Setup(o => o.AddAsync(order)).ReturnsAsync(order);
             OrderController orderController = new OrderController(mock.Object);
             //Action
-            var result = await orderController.AddOrder(order);
+            var result = await orderController.AddOrderAsync(order);
             //Assert
             Assert.IsInstanceOfType(result,new OkResult().GetType());
         }

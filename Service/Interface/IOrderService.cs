@@ -4,7 +4,7 @@ namespace Shared.Interface
 {
     public interface IOrderService
     {
-        Task<Order> Add(Order order);
-        Task<Order> Update(Order order);
+        Task<Order> AddAsync(Order order);
+        Task<Order> UpdateAsync(Order order);
     }
 }

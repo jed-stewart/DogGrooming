@@ -19,7 +19,7 @@ namespace Shared.Service
             };
         }
 
-        public async Task Migrate()
+        public async Task MigrateAsync()
         {
             await _orderContext.Database.MigrateAsync();
             await SeedProductsAsync(100);
