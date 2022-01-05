@@ -8,11 +8,11 @@ namespace Shared.Service
 {
     public class DatabaseService : IDatabaseService
     {
-        public readonly OrderContext _orderContext;
+        public readonly VisitContext _visitContext;
         public readonly Faker _faker;
-        public DatabaseService(OrderContext orderContext)
+        public DatabaseService(VisitContext visitContext)
         {
-            _orderContext = orderContext;
+            _visitContext = visitContext;
             _faker = new Faker
             {
                 Random = new Randomizer(8675309)
@@ -21,13 +21,13 @@ namespace Shared.Service
 
         public async Task MigrateAsync()
         {
-            await _orderContext.Database.MigrateAsync();
+            await _visitContext.Database.MigrateAsync();
             await SeedProductsAsync(100);
         }
 
         public async Task SeedProductsAsync(int count)
         {
-            if (await _orderContext.Product.AnyAsync())
+            if (await _visitContext.Product.AnyAsync())
             {
                 return;
             }
@@ -43,9 +43,9 @@ namespace Shared.Service
                     Description = _faker.Commerce.ProductDescription(),
 
                 };
-                _orderContext.Product.Add(product);
+                _visitContext.Product.Add(product);
 
-                await _orderContext.SaveChangesAsync();
+                await _visitContext.SaveChangesAsync();
             }
         }
     }

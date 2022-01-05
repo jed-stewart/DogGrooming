@@ -51,11 +51,11 @@ builder.Services.AddSingleton(appSettings);
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<OrderContext>(options =>
+builder.Services.AddDbContext<VisitContext>(options =>
     options.UseSqlServer(appSettings.ConnectionStrings.Orders));
 
 builder.Services.AddTransient<IProductService, ProductService>();
-builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IVisitService, VisitService>();
 builder.Services.AddTransient<IDatabaseService, DatabaseService>();
 
 var app = builder.Build();

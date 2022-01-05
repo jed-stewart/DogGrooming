@@ -8,8 +8,8 @@ namespace Shared.Service
 {
     public class ProductService : IProductService
     {
-        public readonly OrderContext _orderContext;
-        public ProductService(OrderContext orderContext)
+        public readonly VisitContext _orderContext;
+        public ProductService(VisitContext orderContext)
         {
             _orderContext = orderContext;
         }

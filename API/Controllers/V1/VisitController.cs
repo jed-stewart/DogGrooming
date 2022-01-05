@@ -8,20 +8,20 @@ namespace API.Controllers.V1
     [ApiController]
     [V1]
     [Route("[controller]")]
-    public class OrderController : Controller
+    public class VisitController : Controller
     {
-        private readonly IOrderService _orderService;
+        private readonly IVisitService _orderService;
 
-        public OrderController (IOrderService orderService)
+        public VisitController (IVisitService orderService)
         {
             _orderService = orderService;
         }
 
-        [HttpPost("place")]
+        [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesErrorResponseType(typeof(BadRequestResult))]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> AddOrderAsync(Order order)
+        public async Task<ActionResult> AddVisitAsync(Visit order)
         {
            await _orderService.AddAsync(order);
             if (order.Id == 0)

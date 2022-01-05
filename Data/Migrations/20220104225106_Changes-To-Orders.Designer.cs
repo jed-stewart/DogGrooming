@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
-    [DbContext(typeof(OrderContext))]
+    [DbContext(typeof(VisitContext))]
     [Migration("20220104225106_Changes-To-Orders")]
     partial class ChangesToOrders
     {
