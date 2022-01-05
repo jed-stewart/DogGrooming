@@ -32,6 +32,10 @@ I use this as a test bed to test out various patterns in the dotnet ecosystem. T
 
 # Release Notes
 
+## [v0.0.2](https://github.com/jed-stewart/DogGrooming/releases/tag/v0.0.2)
+
+* Changed Data Model
+
 ## [v0.0.1](https://github.com/jed-stewart/DogGrooming/releases/tag/v0.0.1)
 
 * Initial
