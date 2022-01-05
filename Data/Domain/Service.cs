@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data.Domain
 {
-    public  class OrderItem : BaseEntity
+    public  class Service : BaseEntity
     {
        public Product Product { get; set; } = new Product();
         public decimal Quantity { get; set; }

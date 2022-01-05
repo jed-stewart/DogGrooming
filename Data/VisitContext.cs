@@ -5,14 +5,16 @@ using Data.Domain;
 
 namespace Data
 {
-    public class OrderContext : DbContext
+    public class VisitContext : DbContext
     {
-        public OrderContext(DbContextOptions options) : base(options)
+        public VisitContext(DbContextOptions options) : base(options)
         {
-
+            // Set API as Startup Project
+            // Set Default project in Package Manager Console to Data
+            // add-migration Initial -context VisitContext -o Migrations
         }
-        public DbSet<Order> Order { get; set; } = default!;
-        public DbSet<OrderItem> OrderItem { get; set; } = default!;
+        public DbSet<Visit> Visit { get; set; } = default!;
+        public DbSet<Service> Service { get; set; } = default!;
         public DbSet<Address> Address { get; set; } = default!;
         public DbSet<Customer> Customer { get; set; } = default!;
         public DbSet<Product> Product { get; set; } = default!;

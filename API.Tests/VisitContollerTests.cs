@@ -9,22 +9,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Tests
 {
     [TestClass]
-    public class OrderContollerTests
+    public class VisitContollerTests
     {
         [TestMethod]
-        public async Task Add_Order_ReturnsOk()
+        public async Task Add_Visit_ReturnsOk()
         {
-            var order = new Order
+            var visit = new Visit
             {
                 Id = 1,
-                OrderNumber = "Test"
+                VisitNumber = "Test"
             };
             //Arrange
-            var mock = new Mock<IOrderService>();
-            mock.Setup(o => o.AddAsync(order)).ReturnsAsync(order);
-            OrderController orderController = new OrderController(mock.Object);
+            var mock = new Mock<IVisitService>();
+            mock.Setup(o => o.AddAsync(visit)).ReturnsAsync(visit);
+            VisitController visitController = new VisitController(mock.Object);
             //Action
-            var result = await orderController.AddOrderAsync(order);
+            var result = await visitController.AddVisitAsync(visit);
             //Assert
             Assert.IsInstanceOfType(result,new OkResult().GetType());
         }

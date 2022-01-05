@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
-    [DbContext(typeof(OrderContext))]
+    [DbContext(typeof(VisitContext))]
     partial class OrderContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -122,79 +122,6 @@ namespace Data.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("Data.Domain.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<DateTimeOffset?>("DateCreated")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("DateModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("OrderNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Order");
-                });
-
-            modelBuilder.Entity("Data.Domain.OrderItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<DateTimeOffset?>("DateCreated")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("DateModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,6)");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderItem");
-                });
-
             modelBuilder.Entity("Data.Domain.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -234,6 +161,79 @@ namespace Data.Migrations
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("Data.Domain.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTimeOffset?>("DateCreated")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DateModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("VisitId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("VisitId");
+
+                    b.ToTable("Service");
+                });
+
+            modelBuilder.Entity("Data.Domain.Visit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTimeOffset?>("DateCreated")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DateModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("VisitNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Visit");
+                });
+
             modelBuilder.Entity("Data.Domain.Address", b =>
                 {
                     b.HasOne("Data.Domain.Customer", null)
@@ -241,17 +241,17 @@ namespace Data.Migrations
                         .HasForeignKey("CustomerId");
                 });
 
-            modelBuilder.Entity("Data.Domain.OrderItem", b =>
+            modelBuilder.Entity("Data.Domain.Service", b =>
                 {
-                    b.HasOne("Data.Domain.Order", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId");
-
                     b.HasOne("Data.Domain.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Data.Domain.Visit", null)
+                        .WithMany("Services")
+                        .HasForeignKey("VisitId");
 
                     b.Navigation("Product");
                 });
@@ -261,9 +261,9 @@ namespace Data.Migrations
                     b.Navigation("Addresses");
                 });
 
-            modelBuilder.Entity("Data.Domain.Order", b =>
+            modelBuilder.Entity("Data.Domain.Visit", b =>
                 {
-                    b.Navigation("OrderItems");
+                    b.Navigation("Services");
                 });
 #pragma warning restore 612, 618
         }
